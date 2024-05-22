@@ -1,17 +1,24 @@
 import Header from "./Header";
 import Main from "./Main";
-import useFakeApi from "../../data/useFakeApi";
+import { QuizItem } from "../../data/useFakeApi";
 import { quizReducer } from "../../data/quizReducer";
 import { useReducer } from "react";
 import Quiz from "./Quiz";
 import { ProgressProps } from "./Progress";
 import QuizIntro from "./QuizIntro";
 import { initQuizState } from "../initQuizState";
+import questionsJSON from "../../data/questions.json";
 
 function App() {
   const [quizState, dispatch] = useReducer(quizReducer, initQuizState);
 
-  const quizItems = useFakeApi();
+  // Only for dev experiments
+  //const quizItems = useFakeApi();
+
+  const quizItems: QuizItem[] = questionsJSON.questions.map((item) => {
+    return { ...item, id: crypto.randomUUID().slice(0, 5) };
+  });
+  console.log(quizItems);
 
   const { currentQuestion, points, isStarted, timeLeft } = quizState;
   const progress: ProgressProps = {
