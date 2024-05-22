@@ -9,16 +9,15 @@ import QuizIntro from "./QuizIntro";
 import { initQuizState } from "../initQuizState";
 import questionsJSON from "../../data/questions.json";
 
+const quizItems: QuizItem[] = questionsJSON.questions.map((item) => {
+  return { ...item, id: crypto.randomUUID().slice(0, 5) };
+});
+
 function App() {
   const [quizState, dispatch] = useReducer(quizReducer, initQuizState);
 
   // Only for dev experiments
   //const quizItems = useFakeApi();
-
-  const quizItems: QuizItem[] = questionsJSON.questions.map((item) => {
-    return { ...item, id: crypto.randomUUID().slice(0, 5) };
-  });
-  console.log(quizItems);
 
   const { currentQuestion, points, isStarted, timeLeft } = quizState;
   const progress: ProgressProps = {
