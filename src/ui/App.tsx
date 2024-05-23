@@ -43,6 +43,10 @@ function App() {
             />
           )}
         </Main>
+        <footer>
+          Credits for idea and design go to{" "}
+          <a href="https://codingheroes.io/">Jonas Schmedtmann</a>.
+        </footer>
       </div>
     </>
   );
